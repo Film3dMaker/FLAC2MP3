@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>AMApplication</key>
+    <string>Finder</string>
+    <key>AMParameterProperties</key>
+    <dict/>
+    <key>AMShowWhenRun</key>
+    <false/>
+    <key>AMTargetApplicationBundleIdentifier</key>
+    <string>com.apple.finder</string>
+    <key>AMWorkflowMetadata</key>
+    <dict>
+        <key>AMWorkflowSummary</key>
+        <string>Envía los archivos FLAC seleccionados a FLAC2MP3 para convertirlos a MP3</string>
+    </dict>
+    <key>AMWorkflowType</key>
+    <string>Service</string>
+    <key>NSServiceName</key>
+    <string>Enviar a FLAC2MP3</string>
+    <key>NSServiceDescription</key>
+    <string>Convierte archivos FLAC a MP3/AAC usando FLAC2MP3</string>
+    <key>NSServiceTypes</key>
+    <array>
+        <dict>
+            <key>NSSendFileTypes</key>
+            <array>
+                <string>public.folder</string>
+            </array>
+            <key>NSMenuItem</key>
+            <dict>
+                <key>default</key>
+                <string>Enviar a FLAC2MP3</string>
+            </dict>
+            <key>NSMessage</key>
+            <string>runWorkflowAsService</string>
+        </dict>
+    </array>
+</dict>
+</plist>

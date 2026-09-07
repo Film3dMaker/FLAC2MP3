@@ -1,0 +1,37 @@
+# Build
+build/
+*.app
+*.dmg
+*.zip
+*.tar.gz
+
+# Xcode
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+DerivedData/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.build/
+*.playgroundbook
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehfb
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+.opencode/
+.codegraph/
+
+# Logs
+*.log

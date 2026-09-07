@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>AMDocumentVersion</key>
+    <string>2</string>
+    <key>AMWorkflowActions</key>
+    <array>
+        <dict>
+            <key>Action</key>
+            <dict>
+                <key>AMAccepts</key>
+                <dict>
+                    <key>Container</key>
+                    <string>List</string>
+                    <key>Optional</key>
+                    <false/>
+                    <key>Types</key>
+                    <array>
+                        <string>public.folder</string>
+                    </array>
+                </dict>
+                <key>AMActionVersion</key>
+                <string>1.0</string>
+                <key>AMApplication</key>
+                <string>FLAC2MP3</string>
+                <key>AMParameterProperties</key>
+                <dict>
+                    <key>command</key>
+                    <dict>
+                        <key>AMAccepts</key>
+                        <dict>
+                            <key>Container</key>
+                            <string>List</string>
+                            <key>Types</key>
+                            <array>
+                                <string>public.folder</string>
+                            </array>
+                        </dict>
+                    </dict>
+                </dict>
+                <key>AMProvides</key>
+                <dict>
+                    <key>Container</key>
+                    <string>List</string>
+                    <key>Types</key>
+                    <array>
+                        <string>public.folder</string>
+                    </array>
+                </dict>
+                <key>ActionBundlePath</key>
+                <string>/System/Library/Automator/Run Shell Script.action</string>
+                <key>ActionName</key>
+                <string>Run Shell Script</string>
+                <key>ActionParameters</key>
+                <dict>
+                    <key>command</key>
+                    <string>for f in "$@"; do
+    open -b "com.flac2mp3.app" "$f"
+done</string>
+                    <key>inputMethod</key>
+                    <string>as arguments</string>
+                    <key>shell</key>
+                    <string>/bin/bash</string>
+                </dict>
+                <key>ActionVersion</key>
+                <string>2.0.4</string>
+            </dict>
+        </dict>
+    </array>
+    <key>AMWorkflowActions</key>
+    <array>
+        <dict>
+            <key>Action</key>
+            <dict>
+                <key>AMAccepts</key>
+                <dict>
+                    <key>Container</key>
+                    <string>List</string>
+                    <key>Types</key>
+                    <array>
+                        <string>public.folder</string>
+                    </array>
+                </dict>
+                <key>AMActionVersion</key>
+                <string>2.0.4</string>
+                <key>AMApplication</key>
+                <string>FLAC2MP3</string>
+                <key>AMParameterProperties</key>
+                <dict>
+                    <key>command</key>
+                    <dict>
+                        <key>AMAccepts</key>
+                        <dict>
+                            <key>Container</key>
+                            <string>List</string>
+                            <key>Types</key>
+                            <array>
+                                <string>public.folder</string>
+                            </array>
+                        </dict>
+                    </dict>
+                </dict>
+                <key>ActionName</key>
+                <string>Run Shell Script</string>
+                <key>ActionParameters</key>
+                <dict>
+                    <key>command</key>
+                    <string>for f in "$@"; do
+    open -b "com.flac2mp3.app" "$f"
+done</string>
+                    <key>inputMethod</key>
+                    <string>as arguments</string>
+                    <key>shell</key>
+                    <string>/bin/bash</string>
+                </dict>
+            </dict>
+        </dict>
+    </array>
+    <key>AMWorkflowContentVersion</key>
+    <string>2</string>
+</plist>
