@@ -2,12 +2,15 @@
      Identidad NexoShape motion engine: fondo #0D1117, cian agente #22D3EE, violeta IA #A78BFA,
      acento de app naranja #FB923C, escena Three.js (red de nodos 3D), glitch tipográfico y HUD de terminal. -->
 <!DOCTYPE html>
-<html lang="es-CL" data-theme="dark">
+<html lang="es" data-theme="dark" data-lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FLAC2MP3 — Transcodificación de alta fidelidad para macOS</title>
 <meta name="description" content="Convierte FLAC a MP3 320 kbps con carátulas ID3v2.3 y tags automáticos. Arrastra carpetas completas, acelera con 2/4/8 hilos y recibe notificaciones al terminar. SwiftUI nativo para Apple Silicon.">
+<link rel="alternate" hreflang="es" href="https://flac2mp3.nexoshape.tech/">
+<link rel="alternate" hreflang="en" href="https://flac2mp3.nexoshape.tech/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://flac2mp3.nexoshape.tech/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&family=Audiowide&display=swap" rel="stylesheet">
 <style>
@@ -69,6 +72,14 @@ nav.links a:hover::before { opacity:1; }
   font-size:11px; padding:7px 14px; cursor:pointer; text-transform:uppercase; letter-spacing:.08em;
 }
 .hud-toggle button.on { background:var(--cyan); color:#04141a; }
+.lang-btn {
+  border:1px solid var(--line); background:transparent; color:var(--dim);
+  font-family:'JetBrains Mono',monospace; font-size:11px; padding:7px 14px;
+  cursor:pointer; text-transform:uppercase; letter-spacing:.08em;
+  margin-left:10px; transition:color .2s,border-color .2s;
+}
+.lang-btn:hover { color:var(--fg); border-color:var(--cyan); }
+.lang-btn.on { background:var(--cyan); color:#04141a; border-color:var(--cyan); }
 
 /* ===== HERO ===== */
 .hero { flex:1; display:grid; grid-template-columns:minmax(0,7fr) minmax(0,4fr); gap:40px; align-items:center; padding:clamp(40px,8vh,90px) clamp(20px,4vw,48px) 80px; max-width:1440px; margin:0 auto; width:100%; }
@@ -215,31 +226,34 @@ footer.site { margin-top:clamp(70px,11vh,130px); border-top:1px solid var(--line
   <header class="nav">
     <div class="brand"><span class="brand-mark"></span>NEXOSHAPE<em>.TECH</em> / FLAC2MP3</div>
     <nav class="links">
-      <a href="#spec">spec</a><a href="#features">features</a><a href="#senal">señales</a><a href="#descarga">descarga</a>
+      <a href="#spec" data-i18n="nav_spec">spec</a><a href="#features" data-i18n="nav_features">features</a><a href="#senal" data-i18n="nav_signals">señales</a><a href="#descarga" data-i18n="nav_download">descarga</a>
     </nav>
-    <div class="hud-toggle" role="group" aria-label="Tema">
-      <button id="btnDark" class="on">dark</button><button id="btnLight">light</button>
+    <div style="display:flex;align-items:center">
+      <div class="hud-toggle" role="group" aria-label="Tema">
+        <button id="btnDark" class="on">dark</button><button id="btnLight">light</button>
+      </div>
+      <button class="lang-btn" id="langBtn" aria-label="Switch to English">EN</button>
     </div>
   </header>
 
   <section class="hero">
     <div>
       <div class="sys-tag rv in"><b>TRANSCODER.LIVE</b> macOS · Apple Silicon · v1.0.0</div>
-      <h1 class="glitch rv in">FLAC<br><span class="glitchable o" data-t="→ MP3 320kbps" id="gword">→ MP3 320kbps</span><br><span class="v">alta fidelidad.</span></h1>
-      <p class="lede rv in">Transcodificación inteligente FLAC → MP3 con <strong>carátulas ID3v2.3 y tags automáticos</strong>. Arrastra carpetas completas, acelera con 2/4/8 hilos, organiza archivos adicionales (.cue, .log, .m3u) y recibe notificaciones al terminar. SwiftUI nativo, modo Glass y aceleración Metal.</p>
+      <h1 class="glitch rv in">FLAC<br><span class="glitchable o" data-t="→ MP3 320kbps" id="gword">→ MP3 320kbps</span><br><span class="v" data-i18n="hero_hifi">alta fidelidad.</span></h1>
+      <p class="lede rv in" data-i18n-html="hero_lede">Transcodificación inteligente FLAC → MP3 con <strong>carátulas ID3v2.3 y tags automáticos</strong>. Arrastra carpetas completas, acelera con 2/4/8 hilos, organiza archivos adicionales (.cue, .log, .m3u) y recibe notificaciones al terminar. SwiftUI nativo, modo Glass y aceleración Metal.</p>
       <div class="cta-row rv in">
-        <a class="btn-hud" href="https://github.com/Film3dMaker/FLAC2MP3/releases" target="_blank" rel="noopener">descargar dmg_</a>
-        <a class="btn-hud vio" href="https://github.com/Film3dMaker/FLAC2MP3" target="_blank" rel="noopener">ver código</a>
+        <a class="btn-hud" href="https://github.com/Film3dMaker/FLAC2MP3/releases" target="_blank" rel="noopener" data-i18n="btn_dmg">descargar dmg_</a>
+        <a class="btn-hud vio" href="https://github.com/Film3dMaker/FLAC2MP3" target="_blank" rel="noopener" data-i18n="btn_code">ver código</a>
       </div>
     </div>
     <aside class="hud-panel rv in" aria-label="Estado del transcoder">
       <header><span>flac2mp3://status</span><b>● LIVE</b></header>
-      <div class="hud-row"><span>CODEC SALIDA</span><span style="color:var(--orange)">LAME MP3 320 CBR</span></div>
-      <div class="hud-row"><span>ETIQUETADO</span><span style="color:var(--cyan)">ID3v2.3 + ARTWORK</span></div>
-      <div class="hud-row"><span>HILOS PARALELOS</span><span style="color:var(--cyan)">2 / 4 / 8</span></div>
-      <div class="hud-row"><span>PÉRDIDA DE CALIDAD</span><span style="color:#3fd68f">0 dB rango dinámico*</span></div>
-      <div style="padding:14px 16px 6px"><span style="color:var(--dim)">RENDIMIENTO METAL</span><div class="bar"><i style="--w:.88"></i></div></div>
-      <div style="padding:4px 16px 14px"><span style="color:var(--dim)">PARALELIZACIÓN</span><div class="bar"><i style="--w:.72"></i></div></div>
+      <div class="hud-row"><span data-i18n="hud_codec">CODEC SALIDA</span><span style="color:var(--orange)">LAME MP3 320 CBR</span></div>
+      <div class="hud-row"><span data-i18n="hud_tag">ETIQUETADO</span><span style="color:var(--cyan)">ID3v2.3 + ARTWORK</span></div>
+      <div class="hud-row"><span data-i18n="hud_threads">HILOS PARALELOS</span><span style="color:var(--cyan)">2 / 4 / 8</span></div>
+      <div class="hud-row"><span data-i18n="hud_loss">PÉRDIDA DE CALIDAD</span><span style="color:#3fd68f">0 dB rango dinámico*</span></div>
+      <div style="padding:14px 16px 6px"><span style="color:var(--dim)" data-i18n="hud_metal">RENDIMIENTO METAL</span><div class="bar"><i style="--w:.88"></i></div></div>
+      <div style="padding:4px 16px 14px"><span style="color:var(--dim)" data-i18n="hud_par">PARALELIZACIÓN</span><div class="bar"><i style="--w:.72"></i></div></div>
       <div style="border-top:1px solid var(--line);padding-top:10px">
         <div class="log-line">&gt; scan: 214 tracks · flac 24/96 <b>OK</b></div>
         <div class="log-line">&gt; encode: cover.jpg → id3v2.3 <span class="ok">✓</span></div>
@@ -251,9 +265,9 @@ footer.site { margin-top:clamp(70px,11vh,130px); border-top:1px solid var(--line
   <div class="marquee" aria-hidden="true">
     <div class="mq-track" id="mqTrack">
       <span><b>[AUDIO]</b> FLAC → MP3 320 kbps LAME</span>
-      <span><b>[TAGS]</b> ID3v2.3 automáticos + carátula</span>
-      <span><b>[BATCH]</b> 2/4/8 hilos · carpetas completas</span>
-      <span><b>[EXTRAS]</b> .cue .log .m3u .jpg organizados</span>
+      <span><b>[TAGS]</b> <span data-i18n="mq_tags">ID3v2.3 automáticos + carátula</span></span>
+      <span><b>[BATCH]</b> <span data-i18n="mq_batch">2/4/8 hilos · carpetas completas</span></span>
+      <span><b>[EXTRAS]</b> <span data-i18n="mq_extras">.cue .log .m3u .jpg organizados</span></span>
       <span><b>[UX]</b> Liquid Glass · Dark Mode · Metal</span>
     </div>
   </div>
@@ -261,59 +275,59 @@ footer.site { margin-top:clamp(70px,11vh,130px); border-top:1px solid var(--line
 
 <main>
 <section class="block" id="spec">
-  <div class="block-head rv"><span class="idx">01</span><h2>Interfaz en producción</h2><span class="rule"></span></div>
+  <div class="block-head rv"><span class="idx">01</span><h2 data-i18n="s1_title">Interfaz en producción</h2><span class="rule"></span></div>
   <div class="appframe rv">
-    <div class="frame-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:10px">flac2mp3 — cola de transcodificación</span></div>
+    <div class="frame-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:10px" data-i18n="s1_frame">flac2mp3 — cola de transcodificación</span></div>
     <img src="./assets/screenshot-1.png" alt="FLAC2MP3 - cola de transcodificación en vivo" loading="lazy">
   </div>
 </section>
 
 <section class="block" id="features">
-  <div class="block-head rv"><span class="idx">02</span><h2>Capacidades del módulo</h2><span class="rule"></span></div>
+  <div class="block-head rv"><span class="idx">02</span><h2 data-i18n="s2_title">Capacidades del módulo</h2><span class="rule"></span></div>
   <div class="feat-grid">
     <div class="feat-card rv"><span class="corner"></span>
-      <div class="feat-top"><span>FTR.01 / CÓDEC</span><span class="num">01</span></div>
-      <h3>FLAC → MP3 320 kbps</h3>
-      <p>Codificación LAME V0/CBR con calidad audiófila, preservando rango dinámico y ganancia de pista.</p>
+      <div class="feat-top"><span data-i18n="fe1_tag">FTR.01 / CÓDEC</span><span class="num">01</span></div>
+      <h3 data-i18n="fe1_t">FLAC → MP3 320 kbps</h3>
+      <p data-i18n="fe1_d">Codificación LAME V0/CBR con calidad audiófila, preservando rango dinámico y ganancia de pista.</p>
       <div class="feat-stack"><i>lame</i><i>cbr-320</i></div>
     </div>
     <div class="feat-card rv"><span class="corner"></span>
-      <div class="feat-top"><span>FTR.02 / METADATA</span><span class="num">02</span></div>
-      <h3>Carátulas y tags ID3v2.3</h3>
-      <p>Extrae e incrusta artwork (cover.jpg, folder.jpg, front.png) y metadatos completos automáticamente.</p>
+      <div class="feat-top"><span data-i18n="fe2_tag">FTR.02 / METADATA</span><span class="num">02</span></div>
+      <h3 data-i18n="fe2_t">Carátulas y tags ID3v2.3</h3>
+      <p data-i18n="fe2_d">Extrae e incrusta artwork (cover.jpg, folder.jpg, front.png) y metadatos completos automáticamente.</p>
       <div class="feat-stack"><i>id3v2.3</i><i>artwork</i></div>
     </div>
     <div class="feat-card rv"><span class="corner"></span>
-      <div class="feat-top"><span>FTR.03 / RENDIMIENTO</span><span class="num">03</span></div>
-      <h3>Multi-core configurable</h3>
-      <p>2, 4 u 8 hilos paralelos para transcodificar batches de carpetas grandes en una fracción del tiempo.</p>
+      <div class="feat-top"><span data-i18n="fe3_tag">FTR.03 / RENDIMIENTO</span><span class="num">03</span></div>
+      <h3 data-i18n="fe3_t">Multi-core configurable</h3>
+      <p data-i18n="fe3_d">2, 4 u 8 hilos paralelos para transcodificar batches de carpetas grandes en una fracción del tiempo.</p>
       <div class="feat-stack"><i>gcd</i><i>8-hilos</i></div>
     </div>
     <div class="feat-card rv"><span class="corner"></span>
-      <div class="feat-top"><span>FTR.04 / ORGANIZACIÓN</span><span class="num">04</span></div>
-      <h3>Organizador de archivos</h3>
-      <p>Copia adjuntos (.cue, .log, .m3u, .jpg) junto al MP3 convertido para mantener tu librería intacta.</p>
+      <div class="feat-top"><span data-i18n="fe4_tag">FTR.04 / ORGANIZACIÓN</span><span class="num">04</span></div>
+      <h3 data-i18n="fe4_t">Organizador de archivos</h3>
+      <p data-i18n="fe4_d">Copia adjuntos (.cue, .log, .m3u, .jpg) junto al MP3 convertido para mantener tu librería intacta.</p>
       <div class="feat-stack"><i>.cue</i><i>.log</i><i>.m3u</i></div>
     </div>
     <div class="feat-card rv"><span class="corner"></span>
-      <div class="feat-top"><span>FTR.05 / ESTADO</span><span class="num">05</span></div>
-      <h3>Cola y progreso en vivo</h3>
-      <p>Vista de tareas con estado, tamaño, tiempo restante y cancelación instantánea de cualquier lote.</p>
+      <div class="feat-top"><span data-i18n="fe5_tag">FTR.05 / ESTADO</span><span class="num">05</span></div>
+      <h3 data-i18n="fe5_t">Cola y progreso en vivo</h3>
+      <p data-i18n="fe5_d">Vista de tareas con estado, tamaño, tiempo restante y cancelación instantánea de cualquier lote.</p>
       <div class="feat-stack"><i>combine</i><i>live-queue</i></div>
     </div>
     <div class="feat-card rv"><span class="corner"></span>
-      <div class="feat-top"><span>FTR.06 / UX NATIVA</span><span class="num">06</span></div>
-      <h3>Liquid Glass + notificaciones</h3>
-      <p>Ventana semitransparente con vibrancy, Dark Mode y aviso nativo al completar con resumen de éxitos/fallos.</p>
+      <div class="feat-top"><span data-i18n="fe6_tag">FTR.06 / UX NATIVA</span><span class="num">06</span></div>
+      <h3 data-i18n="fe6_t">Liquid Glass + notificaciones</h3>
+      <p data-i18n="fe6_d">Ventana semitransparente con vibrancy, Dark Mode y aviso nativo al completar con resumen de éxitos/fallos.</p>
       <div class="feat-stack"><i>swiftui</i><i>appkit</i></div>
     </div>
   </div>
 </section>
 
 <section class="block">
-  <div class="block-head rv"><span class="idx">03</span><h2>Pipeline de conversión</h2><span class="rule"></span></div>
+  <div class="block-head rv"><span class="idx">03</span><h2 data-i18n="s3_title">Pipeline de conversión</h2><span class="rule"></span></div>
   <div class="appframe rv">
-    <div class="frame-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:10px">flac2mp3 — lote 8 hilos · salida organizada</span></div>
+    <div class="frame-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span style="margin-left:10px" data-i18n="s3_frame">flac2mp3 — lote 8 hilos · salida organizada</span></div>
     <div class="shot-2">
       <img src="./assets/screenshot-2.png" alt="FLAC2MP3 - resultados del lote" loading="lazy">
       <div class="term" style="border:0">
@@ -324,7 +338,7 @@ footer.site { margin-top:clamp(70px,11vh,130px); border-top:1px solid var(--line
           <div><span class="k">[03]</span> blue-in-green.flac → mp3 <span class="ok">✓ 7.4 MB</span></div>
           <div><span class="k">[04]</span> all-blues.flac → mp3 <span class="ok">✓ 10.1 MB</span></div>
           <div>&nbsp;</div>
-          <div><span class="k">[m3u]</span> playlist + covers copiados <span class="ok">✓ 4 files</span></div>
+          <div><span class="k">[m3u]</span> <span data-i18n="term_copied">playlist + covers copiados</span> <span class="ok">✓ 4 files</span></div>
           <div><span class="p">$</span> ffmpeg -i in.flac -codec:a libmp3lame -b:a 320k out.mp3<span class="cursor-blink"></span></div>
         </div>
       </div>
@@ -333,26 +347,26 @@ footer.site { margin-top:clamp(70px,11vh,130px); border-top:1px solid var(--line
 </section>
 
 <section class="block" id="senal">
-  <div class="block-head rv"><span class="idx">04</span><h2>Señales recibidas</h2><span class="rule"></span></div>
+  <div class="block-head rv"><span class="idx">04</span><h2 data-i18n="s4_title">Señales recibidas</h2><span class="rule"></span></div>
   <div class="feed">
-    <article class="sig rv"><div class="ch"><span>CANAL: r/audiophile</span><span class="live-dot">● RX</span></div><q>Convertí mi librería FLAC de 400 GB a MP3 320 para el auto. Los tags y carátulas llegaron perfectos, hasta los .cue quedaron ordenados.</q><footer>— <b>@tapehead_cl</b>, coleccionista de discos</footer></article>
-    <article class="sig rv"><div class="ch"><span>CANAL: beta-user</span><span class="live-dot">● RX</span></div><q>La cola con 8 hilos me pasó un batch de 200 tracks en minutos. La barra de progreso en vivo y el aviso nativo al final son un lujo.</q><footer>— <b>DJ Matías R.</b>, set en vivo / archivo digital</footer></article>
-    <article class="sig rv"><div class="ch"><span>CANAL: rd-interno</span><span class="live-dot">● RX</span></div><q>Preservar el artwork y la metadata ID3 al convertir no es trivial; que venga resuelto de fábrica marca la diferencia con los scripts caseros.</q><footer>— <b>NexoShape R+D</b>, revisión interna</footer></article>
+    <article class="sig rv"><div class="ch"><span data-i18n="ch1">CANAL: r/audiophile</span><span class="live-dot">● RX</span></div><q data-i18n="sg1">Convertí mi librería FLAC de 400 GB a MP3 320 para el auto. Los tags y carátulas llegaron perfectos, hasta los .cue quedaron ordenados.</q><footer>— <b>@tapehead_cl</b>, <span data-i18n="sg1_role">coleccionista de discos</span></footer></article>
+    <article class="sig rv"><div class="ch"><span data-i18n="ch2">CANAL: beta-user</span><span class="live-dot">● RX</span></div><q data-i18n="sg2">La cola con 8 hilos me pasó un batch de 200 tracks en minutos. La barra de progreso en vivo y el aviso nativo al final son un lujo.</q><footer>— <b>DJ Matías R.</b>, <span data-i18n="sg2_role">set en vivo / archivo digital</span></footer></article>
+    <article class="sig rv"><div class="ch"><span data-i18n="ch3">CANAL: rd-interno</span><span class="live-dot">● RX</span></div><q data-i18n="sg3">Preservar el artwork y la metadata ID3 al convertir no es trivial; que venga resuelto de fábrica marca la diferencia con los scripts caseros.</q><footer>— <b>NexoShape R+D</b>, <span data-i18n="sg3_role">revisión interna</span></footer></article>
   </div>
 </section>
 
 <section class="block" id="descarga">
   <div class="dl-band rv">
     <div>
-      <h3>Listo para <span class="o" style="color:var(--orange)">transcodificar</span></h3>
-      <p>Descarga la última versión desde GitHub Releases. Compilado con Swift 6 para macOS 13+ en Apple Silicon. Código abierto, sin suscripciones.</p>
+      <h3><span data-i18n="dl_title1">Listo para</span> <span class="o" style="color:var(--orange)" data-i18n="dl_title2">transcodificar</span></h3>
+      <p data-i18n="dl_desc">Descarga la última versión desde GitHub Releases. Compilado con Swift 6 para macOS 13+ en Apple Silicon. Código abierto, sin suscripciones.</p>
       <div class="dl-meta">
         <i>stack: <b>Swift 6</b></i><i>UI: <b>SwiftUI</b></i><i>codec: <b>FFmpeg/LAME</b></i><i>accel: <b>Metal</b></i><i>arquitectura: <b>Apple Silicon</b></i>
       </div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
-      <a class="btn-hud" href="https://github.com/Film3dMaker/FLAC2MP3/releases" target="_blank" rel="noopener">descargar dmg_</a>
-      <a class="btn-hud vio" href="https://github.com/Film3dMaker/FLAC2MP3/issues" target="_blank" rel="noopener">reportar issue</a>
+    <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+      <a class="btn-hud" href="https://github.com/Film3dMaker/FLAC2MP3/releases" target="_blank" rel="noopener" data-i18n="btn_dmg">descargar dmg_</a>
+      <a class="btn-hud vio" href="https://github.com/Film3dMaker/FLAC2MP3/issues" target="_blank" rel="noopener" data-i18n="btn_issue">reportar issue</a>
     </div>
   </div>
 </section>
@@ -362,13 +376,13 @@ footer.site { margin-top:clamp(70px,11vh,130px); border-top:1px solid var(--line
   <div class="foot-grid">
     <div>
       <div class="brand" style="margin-bottom:14px"><span class="brand-mark"></span>NEXOSHAPE<em>.TECH</em></div>
-      <p style="color:var(--dim);max-width:36ch;font-size:13px">Software con precisión de ingeniería, compilado en Ñuñoa, Santiago de Chile. Herramientas propias en producción desde 2025.</p>
+      <p style="color:var(--dim);max-width:36ch;font-size:13px" data-i18n="ft_brand">Software con precisión de ingeniería, compilado en Ñuñoa, Santiago de Chile. Herramientas propias en producción desde 2025.</p>
     </div>
-    <div><h4>NAVEGACIÓN</h4><a href="#spec">Interface</a><a href="#features">Features</a><a href="#senal">Señales</a><a href="#descarga">Descarga</a></div>
-    <div><h4>CANAL DIRECTO</h4><a href="mailto:contacto@nexoshape.com">contacto@nexoshape.com</a><a href="https://github.com/Film3dMaker">github.com/Film3dMaker</a><a href="https://nexoshape.tech/apps">nexoshape.tech/apps</a></div>
-    <div><h4>PARÁMETROS</h4><a>macOS 13+ · Apple Silicon</a><a>Zona horaria GMT-4</a><a>Código abierto en GitHub</a></div>
+    <div><h4 data-i18n="ft_nav">NAVEGACIÓN</h4><a href="#spec" data-i18n="ft_n1">Interface</a><a href="#features" data-i18n="ft_n2">Features</a><a href="#senal" data-i18n="ft_n3">Señales</a><a href="#descarga" data-i18n="ft_n4">Descarga</a></div>
+    <div><h4 data-i18n="ft_ch">CANAL DIRECTO</h4><a href="mailto:contacto@nexoshape.com">contacto@nexoshape.com</a><a href="https://github.com/Film3dMaker">github.com/Film3dMaker</a><a href="https://nexoshape.tech/apps">nexoshape.tech/apps</a></div>
+    <div><h4 data-i18n="ft_par">PARÁMETROS</h4><a>macOS 13+ · Apple Silicon</a><a data-i18n="ft_tz">Zona horaria GMT-4</a><a data-i18n="ft_oss">Código abierto en GitHub</a></div>
   </div>
-  <div class="foot-base"><span>© 2026 nexoshape.tech — all systems operational</span><span>flac2mp3 :: session EOF</span></div>
+  <div class="foot-base"><span data-i18n="ft_base">© 2026 nexoshape.tech — all systems operational</span><span data-i18n="ft_eof">flac2mp3 :: session EOF</span></div>
 </footer>
 
 <script type="importmap">{ "imports": { "three": "./assets/three.module.js" } }</script>
@@ -468,6 +482,103 @@ setInterval(()=>{ if(Math.random()<.4){ gw.classList.add('hit'); setTimeout(()=>
 /* ===== REVEAL ===== */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
 document.querySelectorAll('.rv:not(.in)').forEach(el=>io.observe(el));
+</script>
+
+<script>
+/* ===== i18n ES/EN ===== */
+const I18N = {
+  nav_spec:    ['spec', 'spec'],
+  nav_features:['features', 'features'],
+  nav_signals: ['señales', 'signals'],
+  nav_download:['descarga', 'download'],
+  hero_hifi:   ['alta fidelidad.', 'high fidelity.'],
+  hero_lede:   ['Transcodificación inteligente FLAC → MP3 con <strong>carátulas ID3v2.3 y tags automáticos</strong>. Arrastra carpetas completas, acelera con 2/4/8 hilos, organiza archivos adicionales (.cue, .log, .m3u) y recibe notificaciones al terminar. SwiftUI nativo, modo Glass y aceleración Metal.', 'Smart FLAC → MP3 transcoding with <strong>ID3v2.3 artwork and automatic tags</strong>. Drag whole folders, speed up with 2/4/8 threads, keep companion files (.cue, .log, .m3u) organized, and get notified when it finishes. Native SwiftUI, Glass mode and Metal acceleration.'],
+  btn_dmg:     ['descargar dmg_', 'download dmg_'],
+  btn_code:    ['ver código', 'view code'],
+  btn_issue:   ['reportar issue', 'report issue'],
+  hud_codec:   ['CODEC SALIDA', 'OUTPUT CODEC'],
+  hud_tag:     ['ETIQUETADO', 'TAGGING'],
+  hud_threads: ['HILOS PARALELOS', 'PARALLEL THREADS'],
+  hud_loss:    ['PÉRDIDA DE CALIDAD', 'QUALITY LOSS'],
+  hud_metal:   ['RENDIMIENTO METAL', 'METAL PERFORMANCE'],
+  hud_par:     ['PARALELIZACIÓN', 'PARALLELIZATION'],
+  mq_tags:     ['ID3v2.3 automáticos + carátula', 'automatic ID3v2.3 + artwork'],
+  mq_batch:    ['2/4/8 hilos · carpetas completas', '2/4/8 threads · whole folders'],
+  mq_extras:   ['.cue .log .m3u .jpg organizados', '.cue .log .m3u .jpg organized'],
+  s1_title:    ['Interfaz en producción', 'Production interface'],
+  s1_frame:    ['flac2mp3 — cola de transcodificación', 'flac2mp3 — transcoding queue'],
+  s2_title:    ['Capacidades del módulo', 'Module capabilities'],
+  fe1_tag:     ['FTR.01 / CÓDEC', 'FTR.01 / CODEC'],
+  fe1_t:       ['FLAC → MP3 320 kbps', 'FLAC → MP3 320 kbps'],
+  fe1_d:       ['Codificación LAME V0/CBR con calidad audiófila, preservando rango dinámico y ganancia de pista.', 'LAME V0/CBR encoding with audiophile quality, preserving dynamic range and track gain.'],
+  fe2_tag:     ['FTR.02 / METADATA', 'FTR.02 / METADATA'],
+  fe2_t:       ['Carátulas y tags ID3v2.3', 'ID3v2.3 artwork & tags'],
+  fe2_d:       ['Extrae e incrusta artwork (cover.jpg, folder.jpg, front.png) y metadatos completos automáticamente.', 'Extracts and embeds artwork (cover.jpg, folder.jpg, front.png) and full metadata automatically.'],
+  fe3_tag:     ['FTR.03 / RENDIMIENTO', 'FTR.03 / PERFORMANCE'],
+  fe3_t:       ['Multi-core configurable', 'Configurable multi-core'],
+  fe3_d:       ['2, 4 u 8 hilos paralelos para transcodificar batches de carpetas grandes en una fracción del tiempo.', '2, 4 or 8 parallel threads to transcode large folder batches in a fraction of the time.'],
+  fe4_tag:     ['FTR.04 / ORGANIZACIÓN', 'FTR.04 / ORGANIZATION'],
+  fe4_t:       ['Organizador de archivos', 'File organizer'],
+  fe4_d:       ['Copia adjuntos (.cue, .log, .m3u, .jpg) junto al MP3 convertido para mantener tu librería intacta.', 'Copies companion files (.cue, .log, .m3u, .jpg) next to the converted MP3 to keep your library intact.'],
+  fe5_tag:     ['FTR.05 / ESTADO', 'FTR.05 / STATUS'],
+  fe5_t:       ['Cola y progreso en vivo', 'Live queue & progress'],
+  fe5_d:       ['Vista de tareas con estado, tamaño, tiempo restante y cancelación instantánea de cualquier lote.', 'Task view with status, size, remaining time and instant cancellation of any batch.'],
+  fe6_tag:     ['FTR.06 / UX NATIVA', 'FTR.06 / NATIVE UX'],
+  fe6_t:       ['Liquid Glass + notificaciones', 'Liquid Glass + notifications'],
+  fe6_d:       ['Ventana semitransparente con vibrancy, Dark Mode y aviso nativo al completar con resumen de éxitos/fallos.', 'Translucent window with vibrancy, Dark Mode and a native completion alert with a success/failure summary.'],
+  s3_title:    ['Pipeline de conversión', 'Conversion pipeline'],
+  s3_frame:    ['flac2mp3 — lote 8 hilos · salida organizada', 'flac2mp3 — 8-thread batch · organized output'],
+  term_copied: ['playlist + covers copiados', 'playlist + covers copied'],
+  s4_title:    ['Señales recibidas', 'Signals received'],
+  ch1:         ['CANAL: r/audiophile', 'CHANNEL: r/audiophile'],
+  sg1:         ['Convertí mi librería FLAC de 400 GB a MP3 320 para el auto. Los tags y carátulas llegaron perfectos, hasta los .cue quedaron ordenados.', 'Converted my 400 GB FLAC library to MP3 320 for the car. Tags and artwork came out perfect — even the .cue files stayed organized.'],
+  sg1_role:    ['coleccionista de discos', 'record collector'],
+  ch2:         ['CANAL: beta-user', 'CHANNEL: beta-user'],
+  sg2:         ['La cola con 8 hilos me pasó un batch de 200 tracks en minutos. La barra de progreso en vivo y el aviso nativo al final son un lujo.', 'The 8-thread queue ran a 200-track batch in minutes. The live progress bar and native alert at the end are a real luxury.'],
+  sg2_role:    ['set en vivo / archivo digital', 'live set / digital archive'],
+  ch3:         ['CANAL: rd-interno', 'CHANNEL: internal-rd'],
+  sg3:         ['Preservar el artwork y la metadata ID3 al convertir no es trivial; que venga resuelto de fábrica marca la diferencia con los scripts caseros.', 'Preserving artwork and ID3 metadata when converting is not trivial; having it solved out of the box is what separates this from homegrown scripts.'],
+  sg3_role:    ['revisión interna', 'internal review'],
+  dl_title1:   ['Listo para', 'Ready to'],
+  dl_title2:   ['transcodificar', 'transcode'],
+  dl_desc:     ['Descarga la última versión desde GitHub Releases. Compilado con Swift 6 para macOS 13+ en Apple Silicon. Código abierto, sin suscripciones.', 'Download the latest release from GitHub. Built with Swift 6 for macOS 13+ on Apple Silicon. Open source, no subscriptions.'],
+  ft_brand:    ['Software con precisión de ingeniería, compilado en Ñuñoa, Santiago de Chile. Herramientas propias en producción desde 2025.', 'Engineering-grade software, compiled in Ñuñoa, Santiago de Chile. In-house tools in production since 2025.'],
+  ft_nav:      ['NAVEGACIÓN', 'NAVIGATION'],
+  ft_n1:       ['Interface', 'Interface'],
+  ft_n2:       ['Features', 'Features'],
+  ft_n3:       ['Señales', 'Signals'],
+  ft_n4:       ['Descarga', 'Download'],
+  ft_ch:       ['CANAL DIRECTO', 'DIRECT CHANNEL'],
+  ft_par:      ['PARÁMETROS', 'PARAMETERS'],
+  ft_tz:       ['Zona horaria GMT-4', 'Timezone GMT-4'],
+  ft_oss:      ['Código abierto en GitHub', 'Open source on GitHub'],
+  ft_base:     ['© 2026 nexoshape.tech — all systems operational', '© 2026 nexoshape.tech — all systems operational'],
+  ft_eof:      ['flac2mp3 :: session EOF', 'flac2mp3 :: session EOF'],
+};
+const htmlEl = document.documentElement;
+const langBtn = document.getElementById('langBtn');
+let curLang = localStorage.getItem('flac2mp3-lang');
+if (!curLang) curLang = (navigator.language || 'es').toLowerCase().startsWith('en') ? 'en' : 'es';
+if (!['es','en'].includes(curLang)) curLang = 'es';
+const langKey = k => k.split('_').slice(1).join('_');
+function applyLang(l) {
+  const idx = l === 'en' ? 1 : 0;
+  document.querySelectorAll('[data-i18n]').forEach(el => { const v = I18N[el.dataset.i18n]; if (v) el.textContent = v[idx]; });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => { const v = I18N[el.dataset.i18nHtml]; if (v) el.innerHTML = v[idx]; });
+  htmlEl.lang = l; htmlEl.dataset.lang = l;
+  document.title = l === 'en'
+    ? 'FLAC2MP3 — High-fidelity transcoding for macOS'
+    : 'FLAC2MP3 — Transcodificación de alta fidelidad para macOS';
+  const m = document.querySelector('meta[name="description"]');
+  if (m) m.content = l === 'en'
+    ? 'Convert FLAC to 320 kbps MP3 with ID3v2.3 artwork and automatic tags. Drag whole folders, accelerate with 2/4/8 threads and get notified on finish. Native SwiftUI for Apple Silicon.'
+    : 'Convierte FLAC a MP3 320 kbps con carátulas ID3v2.3 y tags automáticos. Arrastra carpetas completas, acelera con 2/4/8 hilos y recibe notificaciones al terminar. SwiftUI nativo para Apple Silicon.';
+  langBtn.textContent = l === 'en' ? 'ES' : 'EN';
+  langBtn.setAttribute('aria-label', l === 'en' ? 'Cambiar a español' : 'Switch to English');
+  localStorage.setItem('flac2mp3-lang', l);
+}
+langBtn.addEventListener('click', () => { curLang = curLang === 'en' ? 'es' : 'en'; applyLang(curLang); });
+applyLang(curLang);
 </script>
 </body>
 </html>
