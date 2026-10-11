@@ -1,0 +1,26 @@
+# FLAC2MP3
+
+> Transcodificador de audio FLAC a MP3 320 kbps de alta fidelidad para macOS Apple Silicon con aceleración Metal y etiquetado automático ID3v2.3.
+
+## Resumen Ejecutivo
+FLAC2MP3 es una aplicación de escritorio nativa para macOS diseñada para procesar masivamente librerías musicales y archivos de audio de alta resolución (Hi-Res). Convierte archivos FLAC a MP3 a 320 kbps (CBR o LAME V0) preservando el rango dinámico, incrustando carátulas embebidas y conservando la estructura de archivos complementarios (.cue, .log, .m3u, .jpg).
+
+## Especificaciones Técnicas
+- **Plataforma**: macOS 13+ (Ventura, Sonoma, Sequoia).
+- **Arquitectura**: Optimizado nativamente para Apple Silicon.
+- **Stack**: Swift 6, SwiftUI, Combine, AppKit, Metal, FFmpeg (libmp3lame).
+- **Procesamiento Paralelo**: Soporte multi-hilo configurable en 2, 4 u 8 hilos para conversiones concurrentes en lote.
+- **Metadatos y Carátulas**: Extracción e inyección automatizada de tags ID3v2.3 y artwork de alta resolución (cover.jpg, folder.jpg, front.png).
+
+## Capacidades Principales
+1. **Conversión en Lote por Arrastre**: Permite arrastrar carpetas completas y procesar álbumes enteros en segundos.
+2. **Preservación de Archivos Auxiliares**: Copia y sincroniza de forma inteligente archivos de pistas y verificación (.cue, .log, listas .m3u).
+3. **Cola y Monitoreo en Vivo**: Visualización en tiempo real de progreso individual por pista, tamaño resultante, tiempo estimado y cancelación instantánea.
+4. **Diseño Liquid Glass y Notificaciones**: Interfaz semitransparente con modo oscuro/claro y aviso nativo al sistema al finalizar la transcodificación.
+
+## Enlaces Oficiales
+- **Sitio Web Canónico**: [https://flac2mp3.nexoshape.tech/](https://flac2mp3.nexoshape.tech/)
+- **Descargas / Releases**: [https://github.com/Film3dMaker/FLAC2MP3/releases](https://github.com/Film3dMaker/FLAC2MP3/releases)
+- **Código Fuente en GitHub**: [https://github.com/Film3dMaker/FLAC2MP3](https://github.com/Film3dMaker/FLAC2MP3)
+- **Estudio Desarrollador**: [https://nexoshape.tech/](https://nexoshape.tech/)
+- **Ficha en NexoShape**: [https://nexoshape.tech/apps/flac2mp3](https://nexoshape.tech/apps/flac2mp3)

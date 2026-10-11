@@ -1,0 +1,33 @@
+# FLAC2MP3 — Robots.txt & AI Crawler Directives
+User-agent: *
+Allow: /
+
+# AI Search & Agent Crawlers (Explicitly Allowed for LLM Indexing & Semantic Retrieval)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+# Sitemaps & LLM Agent Documentation
+Sitemap: https://flac2mp3.nexoshape.tech/sitemap.xml
+# LLM Agent Documentation:
+# https://flac2mp3.nexoshape.tech/llms.txt
